@@ -66,3 +66,117 @@
         </div>
     </section>
 
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-image">
+                <img src="image4.webp" alt="Woman Image">
+            </div>
+            <div class="hero-content">
+                <h1>Your Voice, Your Power</h1>
+                <p>As a community, we believe that amplifying women's voices and stories is essential for driving real change. Share your experiences.</p>
+                <a href="#" class="btn speak-up-btn">Speak Up</a>
+            </div>
+        </div>
+    </section>
+
+  
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            
+            <p>Your Safety,Our Priority.</p>
+            <p>Email: advayanand88@gmail.com</p>
+            <p>Contact No: 6386771480</p>
+            <p>Address: New Katra Prayagraj, 211002 India</p>
+        </div>
+        <form class="contact-form">
+            <div class="input-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="first-name">First Name *</label>
+                <input type="text" id="first-name" required>
+            </div>
+            <div class="input-group">
+                <label for="last-name">Last Name *</label>
+                <input type="text" id="last-name" required>
+            </div>
+            <div class="input-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="submission-message" class="submission-message" style="display: none;"></div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h4>About Us</h4>
+            <p>At Astra, we are dedicated to empowering women by providing resources, education, and support for safety and empowerment. Join us in making a difference!</p>
+        </div>
+        <div class="footer-section links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#digital-safety">Digital Safety</a></li>
+                <li><a href="#priority-safety">Priority Safety</a></li>
+                <li><a href="#">Join</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h4>Contact Us</h4>
+            <p>Email: advayanand88@gmail.com</p>
+            <p>Phone: 6386771480</p>
+            <p>Address: New Katra, Prayagraj, 211002, India</p>
+        </div>
+        <div class="footer-section social">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="https://www.facebook.com/" target="_blank"><img src="facebook-icon.jpg" alt="Facebook"></a>
+                <a href="https://x.com/AnandAdvay91289" target="_blank"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="https://www.instagram.com/advay_anand_7/" target="_blank"><img src="instagram-icon.jpg" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/advay-anand-a89024277/" target="_blank"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Astra. All Rights Reserved. Terms and Condition
+        </p>
+    </div>
+</footer>
+
+    <!-- JavaScript -->
+    <script>
+        // JavaScript to handle form submission
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('.contact-form');
+            const submissionMessage = document.getElementById('submission-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Display the success message
+                submissionMessage.textContent = 'Form submitted successfully!';
+                submissionMessage.style.display = 'block';
+
+                // Clear the form inputs
+                form.reset();
+
+                // Optional: Hide the message after a few seconds
+                setTimeout(function() {
+                    submissionMessage.style.display = 'none';
+                }, 5000); // Hide after 5 seconds
+            });
+        });
+    </script>
+
+
+</body>
+</html>
+
