@@ -123,3 +123,137 @@ section {
     width: 400px;
     border-radius: 10px;
 }
+
+/* Priority Safety Section */
+.priority-safety {
+    background-color: #f8f4ed;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.priority-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.priority-text {
+    max-width: 600px;
+}
+
+.priority-icon img {
+    width: 50px;
+    margin-bottom: 20px;
+}
+
+.priority-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.priority-text p {
+    font-size: 18px;
+    color: #555;
+}
+
+.priority-image img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image img {
+        max-width: 300px;
+        margin-top: 20px;
+    }
+
+    .digital-safety,
+    .priority-safety {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .digital-image img,
+    .priority-image img {
+        max-width: 300px;
+        margin-top: 20px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FDEFEA;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FBEFE2;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 1200px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.hero-content {
+    max-width: 500px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    color: #2F2F2F;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.speak-up-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #333333;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.speak-up-btn:hover {
+    background-color: #444444;
+}
