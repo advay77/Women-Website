@@ -1,4 +1,3 @@
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener ('click', function (e) {
         e.preventDefault();
@@ -9,23 +8,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// script.js
 
+// Function to validate the contact form
 function validateForm(event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // input fields
+    // Get the input fields
     const email = document.getElementById("email").value;
     const firstName = document.getElementById("first-name").value;
     const lastName = document.getElementById("last-name").value;
     const message = document.getElementById("message").value;
 
-    // Validation should be simple 
+    // Simple validation
     if (email === "" || firstName === "" || lastName === "" || message === "") {
         alert("Please fill in all fields.");
         return;
     }
 
-    // email format
+    // Optionally validate email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         alert("Please enter a valid email address.");
@@ -48,24 +49,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// JavaScript to handle form submission
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector ('.contact-form');
-    const submissionMessage = document.getElementById ('submission-message');
+    const form = document.querySelector('.contact-form');
+    const submissionMessage = document.getElementById('submission-message');
 
-    form.addEventListener ('submit', function(event) {
-        event.preventDefault();
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-       
+        // Display the success message
         submissionMessage.textContent = 'Form submitted successfully!';
         submissionMessage.style.display = 'block';
 
-  
+        // Clear the form inputs
         form.reset();
 
+        // Optional: Hide the message after a few seconds
         setTimeout(function() {
-            submissionMessage.style.display = 'none'; }, 5000); 
+            submissionMessage.style.display = 'none';
+        }, 5000); // Hide after 5 seconds
     });
 });
-
-
-
