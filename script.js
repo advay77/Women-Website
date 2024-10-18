@@ -23,25 +23,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// script.js
 
-// Function to validate the contact form
 function validateForm(event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Get the input fields
+    // input fields
     const email = document.getElementById("email").value;
     const firstName = document.getElementById("first-name").value;
     const lastName = document.getElementById("last-name").value;
     const message = document.getElementById("message").value;
 
-    // Simple validation
+    // Validation should be simple 
     if (email === "" || firstName === "" || lastName === "" || message === "") {
         alert("Please fill in all fields.");
         return;
     }
 
-    // Optionally validate email format
+    // email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         alert("Please enter a valid email address.");
@@ -65,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('.contact-form');
-    const submissionMessage = document.getElementById('submission-message');
+    const form = document.querySelector ('.contact-form');
+    const submissionMessage = document.getElementById ('submission-message');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener ('submit', function(event) {
         event.preventDefault();
 
        
@@ -79,8 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
         form.reset();
 
         setTimeout(function() {
-            submissionMessage.style.display = 'none';
-        }, 5000); 
+            submissionMessage.style.display = 'none'; }, 5000); 
     });
 });
+
+
 
