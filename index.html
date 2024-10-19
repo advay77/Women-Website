@@ -196,6 +196,15 @@
                 }, 5000); 
             });
         });
+        document.getElementById("user-input").addEventListener("keypress", (e) => {
+            if (e.key == "Enter") {
+                const userInput = document.getElementById("user-input").value;
+                if (userInput) {
+                    addMessage (userInput, "user-message");
+                    handleUserMessage (userInput);
+                    document.getElementById ("user-input").value = "";
+                }
+            }
     </script>
 
 
