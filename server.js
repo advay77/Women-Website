@@ -1,33 +1,60 @@
 const express = require('express');
-const multer = require('multer');
+
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Configure multer to save audio files in the "uploads" folder
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+app.use(cors());
+
+app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname))); 
+
+
+const db = new sqlite3.Database(':memory:', (err) => {
+    if (err) {
+        console.error(err.message);
     }
 });
 
-const upload = multer({ storage });
-
-// Root route (optional)
-app.get('/', (req, res) => {
-    res.send('Server is running!');
+db.serialize(() => {
+    db.run(`CREATE TABLE userData (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        message TEXT NOT NULL,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )`);
 });
 
-// Route to handle audio upload
-app.post('/upload', upload.single('audio'), (req, res) => {
-    console.log('Uploaded file:', req.file);
-    res.status(200).send('Audio uploaded successfully!');
+
+app.post('/api/contact', (req, res) => {
+    const { name, email, message } = req.body;
+
+    db.run('INSERT INTO userData (name, email, message) VALUES (?, ?, ?)', [name, email, message], function(err) {
+        if (err) {
+            return res.status(500).json({ message: 'Error saving message.' });
+        }
+        res.status(200).json({ message: 'Message received and stored!', id: this.lastID });
+    });
 });
 
-// Start server
-const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
+
+app.get('/api/messages', (req, res) => {
+    db.all('SELECT * FROM userData', [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error retrieving messages.' });
+        }
+        res.json(rows);
+    });
 });
