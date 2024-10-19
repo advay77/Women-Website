@@ -75,6 +75,13 @@
                 <h1>Your Voice, Your Power</h1>
                 <p>As a community, we believe that amplifying women's voices and stories is essential for driving real change. Share your experiences.</p>
                 <a href="#" class="btn speak-up-btn">Speak Up</a>
+
+                <div class="recorder">
+                    <button id="start-recording">Start Recording</button>
+                    <button id="stop-recording" disabled>Stop Recording</button>
+                    <p id="recording-status">Not recording</p>
+                </div>
+            </div>
             </div>
         </div>
     </section>
@@ -111,8 +118,25 @@
         <div id="submission-message" class="submission-message" style="display: none;"></div>
     </section>
 
-    <!-- Footer -->
-    <!-- Footer -->
+ <div class="chatbot-icon" id="chatbot-icon">
+        <img src="chat-icon.png" alt="Chatbot" width="60" height="60">
+    </div>
+
+ 
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">Safety Bot</div>
+        <div class="chat-box" id="chat-box">
+           
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+
+
+    
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-section about">
@@ -151,27 +175,25 @@
     </div>
 </footer>
 
-    <!-- JavaScript -->
+   
     <script>
-        // JavaScript to handle form submission
+    
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector('.contact-form');
             const submissionMessage = document.getElementById('submission-message');
 
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
+                event.preventDefault(); 
 
-                // Display the success message
                 submissionMessage.textContent = 'Form submitted successfully!';
                 submissionMessage.style.display = 'block';
 
-                // Clear the form inputs
+               
                 form.reset();
 
-                // Optional: Hide the message after a few seconds
                 setTimeout(function() {
                     submissionMessage.style.display = 'none';
-                }, 5000); // Hide after 5 seconds
+                }, 5000); 
             });
         });
     </script>
