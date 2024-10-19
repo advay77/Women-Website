@@ -70,3 +70,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 5000); // Hide after 5 seconds
     });
 });
+
+function connectToPolice() {
+    // Placeholder action for connecting to local police
+    addMessage("Connecting you to local police...", "bot-message");
+    // Add functionality here to trigger emergency services
+}
+document.getElementById("chatbot-icon").addEventListener("click", () => {
+    const chatContainer = document.getElementById("chat-container");
+    chatContainer.classList.toggle("active");
+});
+
+
