@@ -1,50 +1,47 @@
-import os
-import openai
-from flask import Flask, request, jsonify, render_template
+import requests
+from twilio.rest import Client
 
-app = Flask(__name__)
-
-# Initialize OpenAI with the API key from environment variables
-openai.api_key = os.getenv('OPENAI_API_KEY')  # Ensure you set this environment variable
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/chat', methods=["POST"])
-def chat():
-    user_message = request.json.get('message')  # Using .get() for safety
-
-    # Check if the message contains a request for location
-    if "location" in user_message.lower():
-        return send_location()  # Call the location handler directly
-
-    # Call OpenAI API to get a response using GPT-3
-    response = openai.Completion.create(
-        model="text-davinci-003",  # Using GPT-3 model
-        prompt=user_message,
-        max_tokens=150,  # Adjust as needed for response length
-        temperature=0.7,  # Control randomness of responses
-    )
-
-    # Extract the response text
-    chatbot_response = response.choices[0].text.strip()
+def send_alert(contact_number, lat, lon):
+    account_sid = '#' # account SID github didnt gave persmission to show it
+    auth_token = '0b0a346129756151eb76c17ac28ff10f'
+    client = Client(account_sid, auth_token)
     
-    return jsonify({"response": chatbot_response})
+    try:
+        message = client.messages.create(
+            body=f'User in emergency. Location: {lat},{lon}',
+            from_='+15097743936',  # Ensure this is your Twilio number
+            to=contact_number
+        )
+        print(f"Alert sent to {contact_number}. Message SID: {message.sid}")
+    except Exception as e:
+        print(f"Failed to send alert: {e}")
 
-@app.route('/send-location', methods=['POST'])
-def send_location():
-    data = request.json
-    # Process location data
-    lat = data.get('latitude')
-    lon = data.get('longitude')
-    # Here, you would integrate the police API or emergency services
-    return jsonify({"status": "success", "message": f"Location received: {lat}, {lon}. Help is on the way!"})
+def find_nearby_places(lat, lon):
+    api_key = 'AIzaSyAUHGIIISpb2DdPZF57rZMemE1NEZfzbFc'
+    endpoint = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat},{lon}&radius=2000&type=police&key={api_key}'
+    
+    try:
+        response = requests.get(endpoint)
+        response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
+        data = response.json()
 
-@app.route('/connect-police', methods=['POST'])
-def connect_police():
-    # Simulate connecting to the police
-    return jsonify({"status": "success", "message": "Connected to the police. Emergency services are notified!"})
+        # Check if the API returned valid results
+        if 'results' in data:
+            print(f"Found {len(data['results'])} nearby police stations.")
+            return data
+        else:
+            print(f"Error in Google API response: {data}")
+            return None
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching nearby places: {e}")
+        return None
+
+def notify_emergency_contacts(contacts, lat, lon):
+    for contact in contacts:
+        send_alert(contact, lat, lon)
+
+# Example usage:
+contacts = ['+916386771480']  # Replace with actual contact numbers
+lat, lon = 28.7041, 77.1025  # Example coordinates
+notify_emergency_contacts(contacts, lat, lon)
