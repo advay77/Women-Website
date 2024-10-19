@@ -3,7 +3,7 @@ from twilio.rest import Client
 
 def send_alert(contact_number, lat, lon):
     account_sid = '#' # account SID github didnt gave persmission to show it
-    auth_token = '0b0a346129756151eb76c17ac28ff10f'
+    auth_token = '#'  # Same with auth_token
     client = Client(account_sid, auth_token)
     
     try:
